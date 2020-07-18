@@ -1,0 +1,11 @@
+{
+  "name": "repo_tracker_daemon",
+  "version": "1.0.0",
+  "description": "Keep track of issues in repos you want to contribute to.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Krishnanunni R <krishnanunnir97@gmail.com>",
+  "license": "ISC"
+}
