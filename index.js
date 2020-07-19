@@ -11,10 +11,7 @@ function getStarredRepo(starsUrl){
         'Authorization': authToken
     });
     const myRequest = new fetch.Request(starsUrl, {
-        method: 'GET',
         headers: myHeaders,
-        mode: 'cors',
-        cache: 'default',
     });
     fetch(myRequest).
     then((result) =>{
@@ -41,10 +38,7 @@ function fetchIssues(urlIssues){
         'sorted': 'created',
     });
     const myRequest = new fetch.Request(urlIssues, {
-        method: 'GET',
-        headers: myHeaders,
-        mode: 'cors',
-        cache: 'default',
+        headers: myHeaders
     });
     fetch(myRequest)
     .then((result)=>{
