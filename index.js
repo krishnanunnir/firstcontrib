@@ -4,39 +4,41 @@ const { returnRepoName, returnRepoIssue } = require("./helper");
 let apiUrl = "https://api.github.com";
 let userName = "krishnanunnir"
 let authToken = "token <token>"
-let starsUrl = apiUrl + "/users/" + userName +"/starred";
-var lastHour = new Date( Date.now() - 3600000 ).toISOString();
-const myHeaders = new fetch.Headers({
-    'Authorization': authToken
-});
-const myRequest = new fetch.Request(starsUrl, {
-    method: 'GET',
-    headers: myHeaders,
-    mode: 'cors',
-    cache: 'default',
-});
-fetch(myRequest).
-then((result) =>{
-    return result.json();
-}).then((result)=>{
-    repos =  returnRepoName(result);
-    repos.forEach(element => {
-        urlIssues = apiUrl+"/repos/"+element+"/issues";
-        fetchIssues(urlIssues, lastHour);
+let starredRepoUrl = apiUrl + "/users/" + userName +"/starred";
+
+function getStarredRepo(starsUrl){
+    const myHeaders = new fetch.Headers({
+        'Authorization': authToken
     });
-})
-.catch((error)=>{
-    console.log(error);
-});
+    const myRequest = new fetch.Request(starsUrl, {
+        method: 'GET',
+        headers: myHeaders,
+        mode: 'cors',
+        cache: 'default',
+    });
+    fetch(myRequest).
+    then((result) =>{
+        return result.json();
+    }).then((result)=>{
+        repos =  returnRepoName(result);
+        repos.forEach(element => {
+            urlIssues = apiUrl+"/repos/"+element+"/issues";
+            fetchIssues(urlIssues);
+        });
+    })
+    .catch((error)=>{
+        console.log(error);
+    });
+}
 
 
-function fetchIssues(urlIssues, timeSince){
+
+function fetchIssues(urlIssues){
     const myHeaders = new fetch.Headers({
         'Authorization': authToken,
         'Accept': 'application/vnd.github.v3+json',
         'state': 'open',
         'sorted': 'created',
-        'since': timeSince
     });
     const myRequest = new fetch.Request(urlIssues, {
         method: 'GET',
@@ -63,3 +65,5 @@ function fetchIssues(urlIssues, timeSince){
         console.log(error);
     });
 }
+
+getStarredRepo(starredRepoUrl);
