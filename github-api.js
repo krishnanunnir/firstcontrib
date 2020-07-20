@@ -6,22 +6,19 @@ let userName = "krishnanunnir"
 let authToken = "token <token>"
 let starredRepoUrl = apiUrl + "/users/" + userName +"/starred";
 
-function getStarredRepo(starsUrl){
+async function handle(starsUrl){
     const myHeaders = new fetch.Headers({
         'Authorization': authToken
     });
     const myRequest = new fetch.Request(starsUrl, {
         headers: myHeaders,
     });
-    fetch(myRequest).
-    then((result) =>{
+    fetch(myRequest)
+    .then((result) =>{
         return result.json();
-    }).then((result)=>{
-        repos =  returnRepoName(result);
-        repos.forEach(element => {
-            urlIssues = apiUrl+"/repos/"+element+"/issues";
-            fetchIssues(urlIssues);
-        });
+    }).then(async (result)=>{
+        let val = await getStarredRepo(result);
+        console.log(val);
     })
     .catch((error)=>{
         console.log(error);
@@ -29,8 +26,23 @@ function getStarredRepo(starsUrl){
 }
 
 
+async function getStarredRepo(jsonData){
+    repos = returnRepoName(jsonData);
+    console.log(repos);
+    try{
+        return await Promise.all(repos.map((repoVal)=> {
+            urlIssues = apiUrl+"/repos/"+repoVal+"/issues";
+            return fetchIssues(urlIssues)
+            .then((data)=>{
+                return data;
+            });
+        }));
+    } catch(err){
+        throw new Error(err);
+    }
+}
 
-function fetchIssues(urlIssues){
+async function fetchIssues(urlIssues){
     const myHeaders = new fetch.Headers({
         'Authorization': authToken,
         'Accept': 'application/vnd.github.v3+json',
@@ -40,24 +52,19 @@ function fetchIssues(urlIssues){
     const myRequest = new fetch.Request(urlIssues, {
         headers: myHeaders
     });
-    fetch(myRequest)
+    return fetch(myRequest)
     .then((result)=>{
         return result.json();
     })
     .then((data)=>{
-        issues = returnRepoIssue(data);
-        issues.forEach(element => {
-            if(element){
-                console.log(element["title"]);
-                console.log(element["url"]);
-            }
-
-        });
-
+        let val = returnRepoIssue(data);
+        // console.log(val);
+        return val;
     })
     .catch((error)=>{
-        console.log(error);
+        throw new Error(error);
     });
 }
 
-getStarredRepo(starredRepoUrl);
+
+handle(starredRepoUrl);

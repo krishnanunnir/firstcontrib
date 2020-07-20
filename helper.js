@@ -8,20 +8,18 @@ function returnRepoName(json){
 
 function returnRepoIssue(json){
     //Method to return the repo full name from the json
-
-    const repoArray = json.map((issue)=>{
+    const repoArray = json.reduce((filtered, issue)=>{
         createdDate = new Date(issue['created_at']);
         var lastHour = new Date( Date.now() - 86400000 )
         if(createdDate > lastHour ){
-            return {
+            filtered.push({
                 'title':issue["title"],
                 'description':issue["body"],
                 'url': issue["html_url"]
-            };
-        }else{
-            return null;
+            });
         }
-    });
+        return filtered;
+    },[]);
     return repoArray;
 }
 
