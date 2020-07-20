@@ -1,5 +1,5 @@
 const fetch = require("node-fetch");
-const { returnRepoName, returnRepoIssue } = require("./helper");
+const { returnRepoName, returnRepoIssue, returnCleanIssue } = require("./helper");
 
 let apiUrl = "https://api.github.com";
 let userName = "krishnanunnir"
@@ -18,7 +18,7 @@ async function handle(starsUrl){
         return result.json();
     }).then(async (result)=>{
         let val = await getStarredRepo(result);
-        console.log(val);
+        console.log(returnCleanIssue(val));
     })
     .catch((error)=>{
         console.log(error);
@@ -28,13 +28,13 @@ async function handle(starsUrl){
 
 async function getStarredRepo(jsonData){
     repos = returnRepoName(jsonData);
-    console.log(repos);
+    // console.log(repos);
     try{
         return await Promise.all(repos.map((repoVal)=> {
             urlIssues = apiUrl+"/repos/"+repoVal+"/issues";
             return fetchIssues(urlIssues)
             .then((data)=>{
-                return data;
+                return (data);
             });
         }));
     } catch(err){
@@ -46,6 +46,7 @@ async function fetchIssues(urlIssues){
     const myHeaders = new fetch.Headers({
         'Authorization': authToken,
         'Accept': 'application/vnd.github.v3+json',
+        'assigned':'none',
         'state': 'open',
         'sorted': 'created',
     });
