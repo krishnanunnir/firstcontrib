@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Github Search</title>
+    <style>
+        #github-search{
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            line-height: 60px;
+        }
+        #github-values{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+        }
+        .textfield{
+            border-radius: 5px;
+            padding: 10px;
+            border-color: blueviolet;
+            color: blueviolet;
+            width: 150px;
+        }
+        #timesearch{
+            padding: 10px;
+            appearance: none;
+            border-radius: 5px;
+            border-color: blueviolet;
+            color: blueviolet;
+            width:150px;
+        }
+
+        #submitbutton{
+            padding: 10px;
+            border-radius: 5px;
+            color:white;
+            background-color: blueviolet;
+            width:150px;
+        }
+        .textlabelsearch{
+            display:inline;
+            font-size: 13px;
+            color: blueviolet;
+        }
+    </style>
+</head>
+<body>
+    <div id="github-search">
+        <form action="/" method="POST">
+            <input type="text" name="username" class ="textfield" placeholder="username">
+            <select name="time" id="timesearch">
+                <option value="1" selected>Past day</option>
+                <option value="7">Past Week</option>
+                <option value="30">Past Month</option>
+                <option value="365">Past Year</option>
+            </select>
+            <input type="text" name="repo" class="textfield" placeholder="repo">
+            <button type="submit" id="submitbutton">go!</button>
+        </form>
+        <br/>
+    </div>
+    <div id="github-values">
+        this
+    </div>
+</body>
+</html>
