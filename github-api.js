@@ -2,31 +2,41 @@ const fetch = require("node-fetch");
 const { returnRepoName, returnRepoIssue, returnCleanIssue } = require("./helper");
 
 let apiUrl = "https://api.github.com";
-let userName = "krishnanunnir"
 let authToken = "token <token>"
-let starredRepoUrl = apiUrl + "/users/" + userName +"/starred";
 
-async function handle(starsUrl){
-    const myHeaders = new fetch.Headers({
-        'Authorization': authToken
-    });
-    const myRequest = new fetch.Request(starsUrl, {
-        headers: myHeaders,
-    });
-    fetch(myRequest)
-    .then((result) =>{
-        return result.json();
-    }).then(async (result)=>{
-        let val = await getStarredRepo(result);
-        console.log(returnCleanIssue(val));
-    })
-    .catch((error)=>{
-        console.log(error);
-    });
+
+async function handleStarUrl(userInput){
+    let username = userInput["username"];
+    let time = userInput["time"];
+    let repo = userInput["repo"];
+    let userStarUrl = apiUrl + "/users/" + username +"/starred";
+    if (repo){
+        let urlIssues = apiUrl+"/repos/"+repo+"/issues";
+        let returndata = await fetchIssues(urlIssues);
+        return returndata;
+
+    }else{
+        const myHeaders = new fetch.Headers({
+            'Authorization': authToken
+        });
+        const myRequest = new fetch.Request(userStarUrl, {
+            headers: myHeaders,
+        });
+        return fetch(myRequest)
+        .then((result) =>{
+            return result.json();
+        }).then(async (result)=>{
+            let val = await getStarredRepos(result);
+            return returnCleanIssue(val);
+        })
+        .catch((error)=>{
+            console.log(error);
+        });
+    }
 }
 
 
-async function getStarredRepo(jsonData){
+async function getStarredRepos(jsonData){
     repos = returnRepoName(jsonData);
     // console.log(repos);
     try{
@@ -63,9 +73,9 @@ async function fetchIssues(urlIssues){
         return val;
     })
     .catch((error)=>{
-        throw new Error(error);
+        console.log(error);
     });
 }
 
 
-handle(starredRepoUrl);
+module.exports = handleStarUrl;
