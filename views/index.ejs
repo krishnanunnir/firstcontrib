@@ -12,7 +12,7 @@
             align-items: center;
             line-height: 60px;
         }
-        #github-values{
+        #github-issue{
             display: flex;
             justify-content: center;
             align-items: center;
@@ -63,8 +63,13 @@
         </form>
         <br/>
     </div>
-    <div id="github-values">
-        this
+    <div>
+        <% issues.forEach(function(issue) { %>
+            <div id="github-issue">
+                <a href="<%= issue.url %>"><%= issue.title %></a>
+                <%= issue.description %>
+            </div>
+        <% }); %>
     </div>
 </body>
 </html>
