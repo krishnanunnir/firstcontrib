@@ -1,7 +1,10 @@
 const fetch = require("node-fetch");
+const dotenv = require('dotenv');
+dotenv.config();
+
 const { returnRepoName, returnRepoIssue, returnCleanIssue, checkResponseStatus } = require("./helper");
 let apiUrl = "https://api.github.com";
-let authToken = "token <token>"
+let authToken = `token ${process.env.TOKEN}`
 
 
 async function handleUserInput(userInput){
