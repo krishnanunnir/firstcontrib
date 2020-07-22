@@ -4,6 +4,7 @@
   "description": "Keep track of issues in repos you want to contribute to.",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Krishnanunni R <krishnanunnir97@gmail.com>",
@@ -12,6 +13,10 @@
     "body-parser": "^1.19.0",
     "ejs": "^3.1.3",
     "express": "^4.17.1",
+    "markdown-it": "^11.0.0",
     "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }

@@ -4,70 +4,126 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Github Search</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
     <style>
+
+        p{
+            display: block;
+        }
+
+        #all-issue{
+            margin-top: 2rem;
+            line-height: 1rem;
+        }
         #github-search{
             font-family: Arial, Helvetica, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            line-height: 60px;
-        }
-        #github-issue{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 50px;
-        }
-        .textfield{
-            border-radius: 5px;
-            padding: 10px;
-            border-color: blueviolet;
-            color: blueviolet;
-            width: 150px;
+            line-height: 15rem;
         }
         #timesearch{
-            padding: 10px;
+            padding: 0.6rem;
             appearance: none;
-            border-radius: 5px;
+            border-radius: 0.3px;
             border-color: blueviolet;
             color: blueviolet;
             width:150px;
         }
 
         #submitbutton{
-            padding: 10px;
-            border-radius: 5px;
+            padding: 0.6rem;
+            border-radius: 0.3rem;
             color:white;
             background-color: blueviolet;
             width:150px;
         }
+        
+        .github-issue{ 
+            text-align:justify;
+            border-style: solid;
+            border-radius: 1em;
+            margin-top: 1.5rem;
+        }
+        .issue-title{
+            margin: 1rem;
+        }
+        .issue-desc{
+            margin: 1rem;
+        }
+        .markdownSlider{
+            overflow-x: auto;
+            display: block;
+            background-color: #e8e8e6;
+            border-radius: 0.3rem;
+        }
+        .textfield{
+            border-radius: 0.3rem;
+            padding: 0.6rem;
+            border-color: blueviolet;
+            color: blueviolet;
+            width: 150px;
+        }
+
         .textlabelsearch{
             display:inline;
-            font-size: 13px;
+            font-size: 0.8rem;
             color: blueviolet;
         }
     </style>
+    <script>
+        function script(){
+        var images = document.getElementsByTagName("img");
+            var i;
+            for(i = 0; i < images.length; i++) {
+                images[i].className += "pure-img";
+            }
+            code_html = document.getElementsByTagName("code");
+            for(i = 0; i < code_html.length; i++) {
+                var mydiv = document.createElement("div");
+                mydiv.className = "markdownSlider";
+                new_html = "<code>" + code_html[i].innerHTML + "</code>";
+                mydiv.innerHTML = new_html;
+                if(!['p','li'].includes(code_html[i].parentNode.tagName.toLowerCase())){
+                    code_html[i].parentNode.replaceChild(mydiv, code_html[i]);
+                }
+                
+            }
+        }
+    </script>
 </head>
-<body>
-    <div id="github-search">
-        <form action="/" method="POST">
-            <input type="text" name="username" class ="textfield" placeholder="username">
-            <select name="time" id="timesearch">
-                <option value="1" selected>Past day</option>
-                <option value="7">Past Week</option>
-                <option value="30">Past Month</option>
-                <option value="365">Past Year</option>
-            </select>
-            <input type="text" name="repo" class="textfield" placeholder="repo">
-            <button type="submit" id="submitbutton">go!</button>
-        </form>
-        <br/>
+<body onload="script();">
+    <div class="pure-g">
+        <div class="pure-u-1-4"></div>
+        <div class="pure-u-1-2 github-search">
+            <form action="/" method="POST">
+                <input type="text" name="username" class ="textfield" placeholder="username">
+                <select name="time" id="timesearch">
+                    <option value="1" selected>Past day</option>
+                    <option value="7">Past Week</option>
+                    <option value="30">Past Month</option>
+                    <option value="365">Past Year</option>
+                </select>
+                <input type="text" name="repo" class="textfield" placeholder="repo">
+                <button type="submit" id="submitbutton">go!</button>
+            </form>
+            <br/>
+        </div>
+        <div class="pure-u-1-4"></div>
     </div>
-    <div>
+    <div id="all-issue">
         <% issues.forEach(function(issue) { %>
-            <div id="github-issue">
-                <a href="<%= issue.url %>"><%= issue.title %></a>
-                <%= issue.description %>
+            <div class="pure-g">
+                <div class="pure-u-1-4"></div>
+                <div class="pure-u-1-2 github-issue"">
+                    <div class="issue-title">
+                        <a href="<%= issue.url %>"><%= issue.title %></a>
+                    </div>
+                    <div class="issue-desc">
+                        <%- issue.description %>
+                    </div>
+                </div>
+                <div class="pure-u-1-4"></div>
             </div>
         <% }); %>
     </div>
