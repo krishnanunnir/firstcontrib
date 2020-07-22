@@ -25,6 +25,7 @@ var md = require('markdown-it')({
 
 async function checkResponseStatus(response){
     if(response.message ){
+        console.log(response);
         throw new Error("We couldn't locate the specified resource.");
     }else{
         return response;

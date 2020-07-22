@@ -37,7 +37,7 @@ async function handleUserInput(userInput){
             });
         })
         .catch((error)=>{
-            // console.log(error);
+            console.log(error);
             throw(error);
         });
     }
@@ -56,6 +56,7 @@ async function getStarredRepos(jsonData){
             });
         }));
     } catch(error){
+        console.log(val);
         throw(error);
     }
 }
@@ -78,10 +79,10 @@ async function fetchIssues(urlIssues){
     })
     .then((data)=>{
         let val = returnRepoIssue(data);
-        // console.log(val);
         return val;
     })
     .catch((error)=>{
+        console.log(val);
         throw(error);
     });
 }
