@@ -11,3 +11,9 @@ Add environment variables for
 ## Installing dependancies
 
 ```npm install```
+
+## Todo
+
+[ ] Repo name is not being displayed(high-priority).  
+[ ] Sort is now by repo, time. Implement sort by time.   alone.  
+[ ] Add star repo button in the site.  
