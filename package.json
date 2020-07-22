@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "Keep track of issues in repos you want to contribute to.",
   "main": "index.js",
+  "engines": {
+    "node": "13.5.0"
+  },
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Krishnanunni R <krishnanunnir97@gmail.com>",

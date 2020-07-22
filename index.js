@@ -8,4 +8,6 @@ const bodyParser = require("body-parser");
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(router);
-app.listen(process.env.PORT);
+app.listen(process.env.PORT,() => {
+    console.log(`Listening on port ${process.env.PORT}`);
+});
