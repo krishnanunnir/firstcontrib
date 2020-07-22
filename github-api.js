@@ -1,11 +1,10 @@
 const fetch = require("node-fetch");
-const { returnRepoName, returnRepoIssue, returnCleanIssue } = require("./helper");
-
+const { returnRepoName, returnRepoIssue, returnCleanIssue, checkResponseStatus } = require("./helper");
 let apiUrl = "https://api.github.com";
 let authToken = "token <token>"
 
 
-async function handleStarUrl(userInput){
+async function handleUserInput(userInput){
     let username = userInput["username"];
     let time = userInput["time"];
     let repo = userInput["repo"];
@@ -26,11 +25,17 @@ async function handleStarUrl(userInput){
         .then((result) =>{
             return result.json();
         }).then(async (result)=>{
-            let val = await getStarredRepos(result);
-            return returnCleanIssue(val);
+            return checkResponseStatus(result)
+            .then(async (resultData)=>{
+                let val = await getStarredRepos(resultData);
+                return returnCleanIssue(val);
+            }).catch((error)=>{
+                throw(error);
+            });
         })
         .catch((error)=>{
-            console.log(error);
+            // console.log(error);
+            throw(error);
         });
     }
 }
@@ -47,12 +52,13 @@ async function getStarredRepos(jsonData){
                 return (data);
             });
         }));
-    } catch(err){
-        throw new Error(err);
+    } catch(error){
+        throw(error);
     }
 }
 
 async function fetchIssues(urlIssues){
+
     const myHeaders = new fetch.Headers({
         'Authorization': authToken,
         'Accept': 'application/vnd.github.v3+json',
@@ -73,9 +79,9 @@ async function fetchIssues(urlIssues){
         return val;
     })
     .catch((error)=>{
-        console.log(error);
+        throw(error);
     });
 }
 
 
-module.exports = handleStarUrl;
+module.exports = handleUserInput;
