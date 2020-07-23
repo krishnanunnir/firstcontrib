@@ -112,7 +112,6 @@
                     <option value="30">Past Month</option>
                     <option value="365">Past Year</option>
                 </select>
-                <input type="text" name="repo" id="inputfield"  placeholder="repo">
                 <button type="submit" id="submitbutton">go!</button>
             </form>
             <br/>
@@ -131,19 +130,21 @@
         </div>
     <% } %>
     <div id="all-issue">
-        <% issues.forEach(function(issue) { %>
-            <div class="pure-g">
-                <div class="pure-u-1-4"></div>
-                <div class="pure-u-1-2 github-issue">
-                    <div class="issue-title">
-                       <h5><a href="<%= issue.url %>"><%= issue.title %></a></h5>
+        <% repoIssues.forEach(function(repo) { %>
+            <% repo["issues"].forEach(function(issue) { %>
+                <div class="pure-g">
+                    <div class="pure-u-1-4"></div>
+                    <div class="pure-u-1-2 github-issue">
+                        <div class="issue-title">
+                        <h5><a href="<%= issue.url %>"><%= repo["repo"] %>: <%= issue.title %></a></h5>
+                        </div>
+                        <div class="issue-desc">
+                            <%- issue.description %>
+                        </div>
                     </div>
-                    <div class="issue-desc">
-                        <%- issue.description %>
-                    </div>
+                    <div class="pure-u-1-4"></div>
                 </div>
-                <div class="pure-u-1-4"></div>
-            </div>
+            <% }); %>
         <% }); %>
     </div>
 </body>
