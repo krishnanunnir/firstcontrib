@@ -2,7 +2,7 @@ const fetch = require("node-fetch");
 const dotenv = require('dotenv');
 dotenv.config();
 
-const { returnRepoName, returnRepoIssue, returnCleanIssue, checkResponseStatus } = require("./helper");
+const { returnRepoName, returnRepoIssue, checkResponseStatus } = require("./helper");
 let apiUrl = "https://api.github.com";
 let authToken = `token ${process.env.TOKEN}`
 
@@ -31,7 +31,7 @@ async function handleUserInput(userInput){
             return checkResponseStatus(result)
             .then(async (resultData)=>{
                 let val = await getStarredRepos(resultData);
-                return returnCleanIssue(val);
+                return val.filter(val => Object.keys(val).length !== 0);
             }).catch((error)=>{
                 throw(error);
             });
@@ -48,12 +48,17 @@ async function getStarredRepos(jsonData){
     repos = returnRepoName(jsonData);
     // console.log(repos);
     try{
-        return await Promise.all(repos.map((repoVal)=> {
+        return await Promise.all(repos.flatMap(async (repoVal)=> {
             urlIssues = apiUrl+"/repos/"+repoVal+"/issues";
-            return fetchIssues(urlIssues)
-            .then((data)=>{
-                return (data);
-            });
+            let repoIssues = await fetchIssues(urlIssues);
+            if (repoIssues && repoIssues.length){
+                return {
+                    repo: repoVal,
+                    issues: repoIssues
+                }
+            }else{
+                return {};
+            }
         }));
     } catch(error){
         console.log(val);

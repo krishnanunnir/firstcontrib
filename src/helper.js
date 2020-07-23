@@ -67,23 +67,8 @@ function returnRepoIssue(json, timeBack = 86400000){
     }
 }
 
-function returnCleanIssue(json){
-    try{
-        const repoArray = json.reduce((filtered, issue)=>{
-            if(issue && issue.length ){
-                filtered.push(issue);
-            }
-            return filtered;
-        });
-        return repoArray.flat(); 
-    }catch(error){
-        console.log(json);
-        throw new Error(error);
-    }
-}
 module.exports={
     returnRepoName: returnRepoName,
     returnRepoIssue: returnRepoIssue,
-    returnCleanIssue: returnCleanIssue,
     checkResponseStatus: checkResponseStatus
 }
