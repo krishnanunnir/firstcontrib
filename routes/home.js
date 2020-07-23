@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
 const routes = express.Router();
-const githubHandle = require("../github-api");
+const githubHandle = require("../src/github-api");
 
 routes.get('/',(req,res,next)=>{
     res.render(path.join(__dirname,'..','views','index.ejs'),{issues:[],error:""});
