@@ -45,12 +45,13 @@ function returnRepoName(json){
     }
 }
 
-function returnRepoIssue(json, timeBack = 86400000){
+function returnRepoIssue(json, timeBack){
     //Method to return the repo full name from the json
+    // console.log(Number(timeBack)*86400000);
     try{
         const repoArray = json.reduce((filtered, issue)=>{
             createdDate = new Date(issue['created_at']);
-            var lastHour = new Date( Date.now() - timeBack )
+            var lastHour = new Date( Date.now() - Number(timeBack)*86400000 )
             if(createdDate > lastHour ){
                 filtered.push({
                     'title':issue["title"],
@@ -62,7 +63,6 @@ function returnRepoIssue(json, timeBack = 86400000){
         },[]);
         return repoArray;
     }catch(error){
-        console.log(json);
         throw new Error(error);
     }
 }

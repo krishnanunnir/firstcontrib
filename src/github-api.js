@@ -24,7 +24,7 @@ function handleRepo(userInput){
     }).then(async (result)=>{
         return checkResponseStatus(result)
         .then(async (resultData)=>{
-            let val = await getStarredRepos(resultData);
+            let val = await getStarredRepos(resultData, time);
             return val.filter(val => Object.keys(val).length !== 0);
         }).catch((error)=>{
             throw(error);
@@ -37,13 +37,12 @@ function handleRepo(userInput){
 }
 
 
-async function getStarredRepos(jsonData){
+async function getStarredRepos(jsonData,timeBack){
     repos = returnRepoName(jsonData);
-    // console.log(repos);
     try{
         return await Promise.all(repos.map((repoVal)=> {
             urlIssues = apiUrl+"/repos/"+repoVal+"/issues";
-            return fetchIssues(urlIssues)
+            return fetchIssues(urlIssues, timeBack)
             .then((repoIssues)=>{
                 if(repoIssues){
                     return {
@@ -56,12 +55,11 @@ async function getStarredRepos(jsonData){
             });
         }));
     } catch(error){
-        console.log(val);
         throw(error);
     }
 }
 
-async function fetchIssues(urlIssues){
+async function fetchIssues(urlIssues, timeBack){
     
     const myHeaders = new fetch.Headers({
         'Authorization': authToken,
@@ -78,11 +76,10 @@ async function fetchIssues(urlIssues){
         return result.json();
     })
     .then((data)=>{
-        let val = returnRepoIssue(data);
+        let val = returnRepoIssue(data, timeBack);
         return val;
     })
     .catch((error)=>{
-        console.log(val);
         throw(error);
     });
 }
