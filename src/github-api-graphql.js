@@ -1,7 +1,7 @@
 const fetch = require("node-fetch");
 const dotenv = require('dotenv');
 dotenv.config();
-const { responsePathAsArray } = require("graphql");
+
 let apiUrl = "https://api.github.com/graphql";
 let authToken = `Bearer ${process.env.TOKEN}`
 
