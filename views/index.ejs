@@ -132,10 +132,10 @@
     <div class="pure-g search">
         <div class="pure-u-1-4"></div>
         <div class="pure-u-1-2">
-            <form action="/" method="POST" class="pure-form">
-                <input type="text" name="username" id="inputfield" placeholder="Enter your github username">
+            <form action="/instance" method="get" class="pure-form">
+                <input type="text" name="username" id="inputfield" placeholder="Enter your github username" value="<% userInput["username"] %>">
                 <select name="time" id="inputfield">
-                    <option value="1" selected>Past day</option>
+                    <option value="1" >Past day</option>
                     <option value="7">Past Week</option>
                     <option value="30">Past Month</option>
                     <option value="365">Past Year</option>

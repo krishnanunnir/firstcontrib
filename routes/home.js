@@ -4,17 +4,19 @@ const routes = express.Router();
 const githubHandle = require("../src/github-api-graphql");
 
 routes.get('/',(req,res,next)=>{
-    res.render(path.join(__dirname,'..','views','index.ejs'),{issues:[],error:""});
+    res.render(path.join(__dirname,'..','views','index.ejs'),{issues:[],error:"",userInput:{}});
 });
 
-routes.post('/',async(req,res,next)=>{
-    let issues = [];
+routes.get('/instance',async(req,res,next)=>{
+    userInput  = {};
+    userInput["username"] = req.query.username;
+    userInput["time"] = req.query.time;
     try{
-        repoIssues = await githubHandle(req.body)
+        repoIssues = await githubHandle(userInput)
         if(repoIssues && repoIssues.length){
-            res.render(path.join(__dirname,'..','views','index.ejs'),{issues:repoIssues,error:""});
+            res.render(path.join(__dirname,'..','views','index.ejs'),{issues:repoIssues,error:"",userInput:userInput});
         }else{
-            res.render(path.join(__dirname,'..','views','index.ejs'),{issues:[],error:"Sorry! We couldn't find any issues. Try searching longer back."});
+            res.render(path.join(__dirname,'..','views','index.ejs'),{issues:[],error:"Sorry! We couldn't find any issues. Try searching longer back.",userInput:userInput});
         }
     }
     catch(error)
