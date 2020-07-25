@@ -51,17 +51,27 @@
         .github-issue{ 
             text-align:justify;
             border-style: solid;
-
+            border-radius: 1em;
+            color: blueviolet;
+            margin-top: 1.5rem;
+            border-color: blueviolet;
+        }
+        .github-issue-first-friendly{
+            text-align:justify;
+            border-style: solid;
+            color: green;
             border-radius: 1em;
             margin-top: 1.5rem;
+            border-color: green;
         }
         .issue-title a{
             margin: 1rem;
             text-decoration: none;
-            color: blueviolet;
+            color: inherit;
         }
         .issue-desc{
             margin: 1rem;
+            color: black;
         }
         .markdownSlider{
             overflow-x: auto;
@@ -82,6 +92,9 @@
             color: white;
             margin-bottom: 15px;
             border-radius: 0.3em;
+        }
+        #greentext{
+            color: green;
         }
     </style>
     <script>
@@ -108,7 +121,7 @@
 <body onload="script();">
     <div class="pure-g search textbanner">
         <div class="pure-u-1-4"></div>
-        <div class="pure-u-1-2">Search for issues to contribute to. Use your github username. </div>
+        <div class="pure-u-1-2">Search for issues to contribute to. Use your github username.<span id="greentext"> Beginner friendly issues marked in green.</span></div>
         <div class="pure-u-1-4"></div>
     </div>
         </div>
@@ -141,13 +154,16 @@
         </div>
     <% } %>
     <div id="all-issue">
-        <% repoIssues.forEach(function(repo) { %>
-            <% repo["issues"].forEach(function(issue) { %>
+            <% issues.forEach(function(issue) { %>
                 <div class="pure-g">
                     <div class="pure-u-1-4"></div>
-                    <div class="pure-u-1-2 github-issue">
+                    <% if(!issue["beginnerfriendly"]){%>
+                        <div class="pure-u-1-2 github-issue">
+                    <% }else{ %>
+                        <div class="pure-u-1-2 github-issue-first-friendly">
+                    <% } %>
                         <div class="issue-title">
-                        <h5><a href="<%= issue.url %>"><%= repo["repo"] %>: <%= issue.title %></a></h5>
+                        <h5><a href="<%= issue.url %>"><%= issue.repository %>: <%= issue.title %></a></h5>
                         </div>
                         <div class="issue-desc">
                             <%- issue.description %>
@@ -156,7 +172,6 @@
                     <div class="pure-u-1-4"></div>
                 </div>
             <% }); %>
-        <% }); %>
     </div>
 </body>
 </html>

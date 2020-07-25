@@ -1,3 +1,4 @@
+// Not used anymore as we are switching to graphql
 var md = require('markdown-it')({
     html:         true,      
     xhtmlOut:     false,      
