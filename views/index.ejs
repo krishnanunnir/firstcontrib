@@ -42,9 +42,7 @@
             color:white;
             background-color: blueviolet;
         }
-        #inputfield{
-            border-radius: 0.3rem;
-            border-color: blueviolet;
+        .inputfield{
             color: blueviolet;
         }
         .textbanner{
@@ -103,7 +101,11 @@
     </style>
     <script>
         function script(){
-        var images = document.getElementsByTagName("img");
+            let x = document.getElementById('timeDropdown');
+            x.value = `<%= userInput["time"] %>`;
+            x = document.getElementById('userText');
+            x.value = `<%= userInput["username"] %>`;
+            var images = document.getElementsByTagName("img");
             var i;
             for(i = 0; i < images.length; i++) {
                 images[i].className += "pure-img";
@@ -133,8 +135,8 @@
         <div class="pure-u-1-4"></div>
         <div class="pure-u-1-2">
             <form action="/instance" method="get" class="pure-form">
-                <input type="text" name="username" id="inputfield" placeholder="Enter your github username" value="<% userInput["username"] %>">
-                <select name="time" id="inputfield">
+                <input type="text" name="username" class="inputfield" id="userText" placeholder="Enter your github username" >
+                <select name="time" class="inputfield" id="timeDropdown">
                     <option value="1" >Past day</option>
                     <option value="7">Past Week</option>
                     <option value="30">Past Month</option>
