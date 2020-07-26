@@ -4,18 +4,23 @@ dotenv.config();
 
 let apiUrl = "https://api.github.com/graphql";
 let authToken = `Bearer ${process.env.TOKEN}`
-
+issuePagination = {
+    "1": 50,
+    "7" : 30,
+    "30": 20,
+    "365": 10
+}
 
 beginner_issues = ["good first issue","beginner friendly","first-timers-only","good-first-issue","first timers only"];
 
 query = `
-query IssueDetails($timeBack: String!,$username: String!) {
+query IssueDetails($timeBack: String!,$username: String!,$paginate: Int) {
     user(login: $username) {
       login
       starredRepositories {
         edges {
           node {
-            issues(last: 50, filterBy: {states: [OPEN], since: $timeBack},orderBy:{direction:DESC, field:CREATED_AT}) {
+            issues(last: $paginate, filterBy: {states: [OPEN], since: $timeBack},orderBy:{direction:DESC, field:CREATED_AT}) {
               edges {
                 node {
                   title
@@ -48,7 +53,8 @@ function handleRepo(userInput){
     var timeBack = new Date(Date.now() - 86400000*Number(time));
     const variables = {
         "timeBack": `${timeBack.toISOString()}`,
-        "username": `${username}`
+        "username": `${username}`,
+        "paginate": issuePagination[time]
     }
     return fetch(apiUrl,{
         'method': "POST",

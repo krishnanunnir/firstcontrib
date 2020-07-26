@@ -110,11 +110,11 @@
             for(i = 0; i < images.length; i++) {
                 images[i].className += "pure-img";
             }
-            code_html = document.getElementsByTagName("code");
+            code_html = document.getElementsByTagName("pre");
             for(i = 0; i < code_html.length; i++) {
                 var mydiv = document.createElement("div");
                 mydiv.className = "markdownSlider";
-                new_html = "<code>" + code_html[i].innerHTML + "</code>";
+                new_html = "<pre>" + code_html[i].innerHTML + "</pre>";
                 mydiv.innerHTML = new_html;
                 if(!['p','li'].includes(code_html[i].parentNode.tagName.toLowerCase())){
                     code_html[i].parentNode.replaceChild(mydiv, code_html[i]);
