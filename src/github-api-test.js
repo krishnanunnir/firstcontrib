@@ -2,6 +2,10 @@ const handleRepo = require("./github-api-graphql");
 
 input = {};
 input["username"] = "krishnanunnir";
-input["time"] = "7";
+input["time"] = "1";
+async function test(){
+    let val = await handleRepo(input);
+    console.log(val);
+}
 
-console.log(handleRepo(input));
+test();
