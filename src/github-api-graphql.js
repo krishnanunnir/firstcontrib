@@ -15,7 +15,7 @@ query IssueDetails($timeBack: String!,$username: String!) {
       starredRepositories {
         edges {
           node {
-            issues(last: 20, filterBy: {states: [OPEN], since: $timeBack}) {
+            issues(last: 50, filterBy: {states: [OPEN], since: $timeBack},orderBy:{direction:DESC, field:CREATED_AT}) {
               edges {
                 node {
                   title
@@ -82,7 +82,8 @@ function handleRepo(userInput){
                         "description": issue["bodyHTML"],
                         "url": issue["url"],
                         "repository": issue["repository"]["nameWithOwner"],
-                        "beginnerfriendly": labelStatus
+                        "beginnerfriendly": labelStatus,
+                        "createdAt": issue["createdAt"]
                     };
                     issuesList.push(val);
                 }
