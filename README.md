@@ -18,9 +18,8 @@ Add environment variables in .env file for
 
 ## Todo
 
-[x] Repo name is not being displayed(high-priority).  
-[ ] Sort is now by repo, time. Implement sort by time.   alone.  (Not viable for now)
-[ ] Add star repo button in the site.  
-[ ] Add labels to show beginner friendly issues
-[ ] Implement command line tool for the product.
+- [x] Repo name is not being displayed(high-priority).  
+- [x] Add star repo button in the site.  
+- [x] Add labels to show beginner friendly issues
+- [ ] Implement command line tool for the product.
 
