@@ -2,6 +2,10 @@
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/krishnanunnir/server_monitor_bot/blob/master/LICENSE)
 [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
+<p align="center">
+  <img src="docs/website-working.gif" height=300 width=400 />
+</p>
+
 Search for issues to make your first contribution for from your starred repos. With github search it is a lot of work to find issues that I am passionate about contributing to. This is intended to bridge this missing piece of personalised issues. All contributions to this project are welcome.
 
 Also a commandline tool for this will be coming soon!!
