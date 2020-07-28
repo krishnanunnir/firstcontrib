@@ -2,10 +2,6 @@
 [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/krishnanunnir/server_monitor_bot/blob/master/LICENSE)
 [![Open Source Love svg1](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
-<p align="center">
-  <img src="docs/website-working.gif" height=300 width=400 />
-</p>
-
 When I first tried contributing to open source it was very difficult finding relevant issues that I would actually enjoy contributing to, In the spirit of open-source, I thought I should make this process a bit simpler for other people who are on the same boat. So I made a website to do this.
 
 Also a commandline tool for this will be coming soon!!
