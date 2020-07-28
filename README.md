@@ -6,7 +6,7 @@
   <img src="docs/website-working.gif" height=300 width=400 />
 </p>
 
-Search for issues to make your first contribution for from your starred repos. With github search it is a lot of work to find issues that I am passionate about contributing to. This is intended to bridge this missing piece of personalised issues. All contributions to this project are welcome.
+When I first tried contributing to open source it was very difficult finding relevant issues that I would actually enjoy contributing to, In the spirit of open-source, I thought I should make this process a bit simpler for other people who are on the same boat. So I made a website to do this.
 
 Also a commandline tool for this will be coming soon!!
 
