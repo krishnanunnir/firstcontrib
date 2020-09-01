@@ -1,7 +1,7 @@
 ## A walkthrough buidling First Contrib
 
 
-<img src="../first-contrib.png">
+<img src="./first-contrib.png">
 
 [website](https://firstcontrib.herokuapp.com/) [repo](https://github.com/krishnanunnir/opensource-first-contrib-search)  
 
