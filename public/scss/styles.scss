@@ -1,0 +1,85 @@
+//viewport breakpoints
+$desktop-bp: 1024px;
+$tablet-bp: 1023px;
+$mobile-bp: 480px;
+
+.upper-div {
+  display: flex;
+  place-content: end;
+  flex-wrap: wrap;
+  padding: 2.5vh 2.5vw;
+  margin-top: 2.5vh;
+  // border: 1px solid red; //debug
+  span {
+    //github buttons
+    margin: 0 0.625vmin;
+  }
+}
+
+.mid-div {
+  display: flex;
+  flex-direction: column;
+  place-content: center;
+  // border: 1px solid blue; //debug
+
+  .pure-g {
+    place-content: center;
+  }
+  .form-container {
+    // border: 1px solid red; //debug
+    form {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      width: 100%;
+      // border: 1px solid green; //debug
+      //desktop and tablet viewport only
+      #userText {
+        min-width: 50%;
+        margin-right: 1.25vmin;
+      }
+      #timeDropdown {
+        margin-right: 1.25vmin;
+      }
+      #submitbutton {
+        padding: 0.6rem 1.1rem !important;
+        margin-top: 0;
+      }
+      //mobile viewport
+      @media (max-width: $mobile-bp) {
+        #userText {
+          display: inline-block;
+          margin-bottom: 0;
+        }
+        #submitbutton {
+          //pushes the submit button down
+          display: block;
+          margin: 0.7rem 0;
+        }
+      }
+    }
+  }
+  @media (max-width: $tablet-bp) {
+    .textbanner {
+    }
+    .pure-u-1-2,
+    .pure-u-12-24 {
+      width: 75%;
+    }
+  }
+  @media (max-width: $mobile-bp) {
+    .textbanner {
+      font-size: 1.8rem;
+      max-width: 35ch;
+    }
+    .pure-u-1-2,
+    .pure-u-12-24 {
+      width: 92%;
+    }
+  }
+}
+
+//inputs
+.pure-form {
+  // border: 1px solid green; //debug
+}
