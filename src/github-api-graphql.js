@@ -50,6 +50,7 @@ query IssueDetails($timeBack: String!,$username: String!,$paginate: Int) {
 function handleRepo(userInput){
     let username = userInput["username"];
     let time = userInput["time"];
+    let beginnerfriendly = (userInput["beginnerfriendly"]==1)?true:false;
     var timeBack = new Date(Date.now() - 86400000*Number(time));
     const variables = {
         "timeBack": `${timeBack.toISOString()}`,
@@ -91,7 +92,12 @@ function handleRepo(userInput){
                         "beginnerfriendly": labelStatus,
                         "createdAt": issue["createdAt"]
                     };
-                    issuesList.push(val);
+                    if(labelStatus && beginnerfriendly){
+                      issuesList.push(val);
+                    }
+                    if(!beginnerfriendly){
+                      issuesList.push(val);
+                    }
                 }
             }
         }

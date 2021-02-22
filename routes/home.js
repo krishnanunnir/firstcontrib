@@ -11,6 +11,7 @@ routes.get('/instance',async(req,res,next)=>{
     userInput  = {};
     userInput["username"] = req.query.username;
     userInput["time"] = req.query.time;
+    userInput["beginnerfriendly"] = req.query.beginnerfriendly;
     try{
         repoIssues = await githubHandle(userInput)
         if(repoIssues && repoIssues.length){
@@ -21,7 +22,7 @@ routes.get('/instance',async(req,res,next)=>{
     }
     catch(error)
     {
-        res.render(path.join(__dirname,'..','views','index.ejs'),{issues:[],error:"We couldn't find what you were searching for"});
+        res.render(path.join(__dirname,'..','views','index.ejs'),{issues:[],error:"We couldn't find what you were searching for, please make sure you have starred repos."});
     }
 });
 
