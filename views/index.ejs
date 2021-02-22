@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,74 +9,38 @@
     <meta property="og:url" content="https://firstcontrib.herokuapp.com/">
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>First Contrib</title>
-    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="stylesheet" href="https://bulma.io/vendor/fontawesome-free-5.15.2-web/css/all.min.css">
     <style>
-
-        p{
+        p {
             display: block;
         }
 
-        #all-issue{
+        #all-issue {
             margin-top: 2rem;
             line-height: 1rem;
         }
-        .search{
-            font-family: Arial, Helvetica, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 80px;
-            margin-bottom: 40px;
-        }
-        #timesearch{
+
+        #timesearch {
             padding: 0.6rem;
             appearance: none;
             border-radius: 0.3rem;
             border-color: blueviolet;
             color: blueviolet;
-            width:150px;
+            width: 150px;
         }
 
-        #submitbutton{
-            padding: 0.6rem;
-            border-radius: 0.3rem;
-            color:white;
-            background-color: blueviolet;
-        }
-        .inputfield{
-            color: blueviolet;
-        }
-        .textbanner{
-            color: blueviolet;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 2rem;
-        }
-        .github-issue{ 
-            text-align:justify;
-            border-style: solid;
-            border-radius: 1em;
-            color: blueviolet;
-            margin-top: 1.5rem;
-            border-color: blueviolet;
-        }
-        .github-issue-first-friendly{
-            text-align:justify;
-            border-style: solid;
-            color: green;
-            border-radius: 1em;
-            margin-top: 1.5rem;
-            border-color: green;
-        }
-        .issue-title a{
+        .issue-title a {
             margin: 1rem;
             text-decoration: none;
-            color: inherit;
         }
-        .issue-desc{
+
+        .issue-desc {
             margin: 1rem;
-            color: black;
+            color: grey;
         }
-        .markdownSlider{
+
+        .markdownSlider {
             overflow-x: auto;
             display: block;
             background-color: #e8e8e6;
@@ -83,111 +48,186 @@
         }
 
 
-        .textlabelsearch{
-            display:inline;
+        .textlabelsearch {
+            display: inline;
             font-size: 0.8rem;
             color: rgb(182, 49, 26);
         }
+
         .error {
             padding: 20px;
-            background-color: blueviolet; /* Red */
+            background-color: blueviolet;
+            /* Red */
             color: white;
             margin-bottom: 15px;
             border-radius: 0.3em;
         }
-        #greentext{
+
+        #greentext {
             color: green;
+        }
+        .issue{
+            margin-top: 1em;
+            word-wrap: break-word;
+            box-shadow: 0 0.5em 1em -0.125em rgb(10 10 10 / 40%), 0 0 0 1px rgb(10 10 10 / 5%) !important;
+            
+        }
+        .discord{
+            background-color: #7289DA !important;
+            color: white;
+        }
+        .textbanner{
+            margin-top: 5em;
+        }
+        #textLogo{
+            font-size: 1.2em;
+            font-weight: 700;
         }
     </style>
     <script>
-        function script(){
-            let x = document.getElementById('timeDropdown');
-            x.value = `<%= userInput["time"] %>`;
-            x = document.getElementById('userText');
-            x.value = `<%= userInput["username"] %>`;
-            var images = document.getElementsByTagName("img");
-            var i;
-            for(i = 0; i < images.length; i++) {
-                images[i].className += "pure-img";
-            }
+        function script() {
+            document.getElementById('time').value=`<%= userInput["time"] %>`;
             code_html = document.getElementsByTagName("pre");
-            for(i = 0; i < code_html.length; i++) {
+            for (i = 0; i < code_html.length; i++) {
                 var mydiv = document.createElement("div");
                 mydiv.className = "markdownSlider";
                 new_html = "<pre>" + code_html[i].innerHTML + "</pre>";
                 mydiv.innerHTML = new_html;
-                if(!['p','li'].includes(code_html[i].parentNode.tagName.toLowerCase())){
+                if (!['p', 'li'].includes(code_html[i].parentNode.tagName.toLowerCase())) {
                     code_html[i].parentNode.replaceChild(mydiv, code_html[i]);
                 }
-                
+
             }
         }
     </script>
 </head>
+
 <body onload="script();">
-    <div class="pure-g search">
-        <div class="pure-u-1-3"></div>
-        <div class="pure-u-1-3">
-            <a class="github-button" href="https://github.com/krishnanunnir/opensource-first-contrib-search/issues" data-color-scheme="no-preference: light; light: light; dark: light;" data-size="large" data-show-count="true" aria-label="Issue krishnanunnir/opensource-first-contrib-search on GitHub">Issue</a>
-            <a class="github-button" href="https://github.com/krishnanunnir/opensource-first-contrib-search" data-color-scheme="no-preference: light; light: light; dark: light;" data-size="large" data-show-count="true" aria-label="Star krishnanunnir/opensource-first-contrib-search on GitHub">Star</a>
-            <a class="github-button" href="https://github.com/krishnanunnir/opensource-first-contrib-search/fork" data-color-scheme="no-preference: light; light: light; dark: light;" data-size="large" data-show-count="true" aria-label="Fork krishnanunnir/opensource-first-contrib-search on GitHub">Fork</a>
-            <a class="github-button" href="https://github.com/krishnanunnir" data-color-scheme="no-preference: light; light: light; dark: light;" data-size="large" data-show-count="true" aria-label="Follow @krishnanunnir on GitHub">Follow @krishnanunnir</a>
+    <nav class="navbar is-transparent">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://bulma.io">
+                <span id="textLogo">FIRSTCONTRIB</span>
+            </a>
+            <div class="navbar-burger" data-target="navbarExampleTransparentExample">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-        <div class="pure-u-1-3"></div>
-    </div>
-        
-    <div class="pure-g search textbanner">
-        <div class="pure-u-1-4"></div>
-        <div class="pure-u-1-2">Search for issues to contribute to. Use your github username.<span id="greentext"> Beginner friendly issues marked in green.</span></div>
-        <div class="pure-u-1-4"></div>
-    </div>
-    <div class="pure-g">
-        <div class="pure-u-1-3"></div>
-        <div class="pure-u-1-3">
-            <form action="/instance" method="get" class="pure-form">
-                <input type="text" name="username" class="inputfield" id="userText" placeholder="Enter your github username" >
-                <select name="time" class="inputfield" id="timeDropdown">
-                    <option value="1" >Past day</option>
-                    <option value="7">Past Week</option>
-                    <option value="30">Past Month</option>
-                    <option value="365">Past Year</option>
-                </select>
-                <button type="submit" id="submitbutton">go!</button>
-            </form>
-            <br/>
+
+        <div id="navbarExampleTransparentExample" class="navbar-menu">
+            <div class="navbar-start">
+                    <a class="navbar-item" href="http://krishnanunnir.me/firstcontrib/">
+                        How it was made
+                    </a>
+            </div>
+
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="field is-grouped">
+                        <p class="control">
+                            <a class="bd-tw-button button" data-social-network="Twitter" data-social-action="tweet"
+                                data-social-target="https://bulma.io" target="_blank"
+                                href="https://twitter.com/intent/tweet?text=FirstContrib: Find open source issues that matters to you.&amp;hashtags=opensource&amp;url=https://firstcontrib.herokuapp.com&amp;">
+                                <span class="icon">
+                                    <i class="fab fa-twitter"></i>
+                                </span>
+                                <span>
+                                    Tweet
+                                </span>
+                            </a>
+                        </p>
+                        <p class="control">
+                            <a class="button is-primary" href="https://github.com/krishnanunnir/firstcontrib">
+                                <span class="icon">
+                                    <i class="fab fa-github"></i>
+                                </span>
+                                <span>Edit on Github</span>
+                            </a>
+                        </p>
+                        <p class="control">
+                            <a class="button discord" href="https://github.com/krishnanunnir/firstcontrib">
+                                <span class="icon">
+                                    <i class="fab fa-discord"></i>
+                                </span>
+                                <span>Join our Discord</span>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="pure-u-1-3"></div>
+    </nav>
+    <div class="columns is-centered"">
+
+        <div class="column is-three-fifths textbanner">
+            Finding issues to contribute to in open-source is hard. Please use this tool to find issues that are personalised for you based on your starred repos. For beginners, check the 'Beginner Issues Only' to find issues intended for beginners. If you like this project, please feel free to contribute.
+            <br><br>
+            <strong>Note: If you are unable to find issues, please consider increasing the timeperiod.</strong>
+        </div>
+    </div>
+    <form action="/instance" method="get">
+        <div class="columns is-centered">
+            <div class="column is-three-fifths">
+                <div class="control has-icons-left">
+                    <input type="text" name="username" class="input" id="userText"
+                        placeholder="Enter your github username" value="<%= userInput["username"] %>">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-user"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="columns is-centered is-vcentered">
+            <div class="column is-one-fifth">
+                <div class="control">
+                    <div class="select">
+                        <select name="time" id="time">
+                            <option value="1">Past day</option>
+                            <option value="7">Past Week</option>
+                            <option value="30">Past Month</option>
+                            <option value="365">Past Year</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-one-fifth">                
+                <label class="checkbox">
+                    <input type="checkbox" name="beginnerfriendly" value="1" <% if(userInput["beginnerfriendly"]=="1") {%> checked="checked" <% }%>>
+                    Beginner Issues Only
+                </label>
+            </div>
+            <div class="column is-one-fifth">
+                <button type="submit" class="button is-info is-pulled-right">Search for Issues!</button>
+            </div>
+
+        </div>
+    </form>
+
     </div>
     <% if(error){ %>
-        <div id="error">
-            <div class="pure-g">
-                <div class="pure-u-1-4"></div>
-                <div class="pure-u-1-2 error">
+    <div class="columns is-centered">
+        <div class="column is-three-fifths">
+            <article class="message is-danger">
+                <div class="message-body">
                     <%= error %>
                 </div>
-                <div class="pure-u-1-4"></div>
-            </div>        
+            </article>
         </div>
-    <% } %>
-    <div id="all-issue">
-            <% issues.forEach(function(issue) { %>
-                <div class="pure-g">
-                    <div class="pure-u-1-4"></div>
-                    <% if(!issue["beginnerfriendly"]){%>
-                        <div class="pure-u-1-2 github-issue">
-                    <% }else{ %>
-                        <div class="pure-u-1-2 github-issue-first-friendly">
-                    <% } %>
-                        <div class="issue-title">
-                        <h5><a href="<%= issue.url %>"><%= issue.repository %>: <%= issue.title %></a></h5>
-                        </div>
-                        <div class="issue-desc">
-                            <%- issue.description %>
-                        </div>
-                    </div>
-                    <div class="pure-u-1-4"></div>
-                </div>
-            <% }); %>
     </div>
+    <% } %>
+    <% issues.forEach(function(issue) { %>
+    <div class="columns is-centered">
+        <div class="column is-three-fifths box issue">
+            <div class="issue-title">
+                <h5><a href="<%= issue.url %>"><%= issue.repository %>: <%= issue.title %></a></h5>
+            </div>
+            <div class="issue-desc">
+                <%- issue.description %>
+            </div>
+        </div>
+    </div>
+    <% }); %>
 </body>
+
 </html>
