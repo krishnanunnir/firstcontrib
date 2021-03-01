@@ -7,8 +7,8 @@ let authToken = `Bearer ${process.env.TOKEN}`
 issuePagination = {
     "1": 50,
     "7" : 30,
-    "30": 20,
-    "365": 10
+    "30": 30,
+    "365": 30
 }
 
 beginner_issues = ["good first issue","beginner friendly","first-timers-only","good-first-issue","first timers only"];
